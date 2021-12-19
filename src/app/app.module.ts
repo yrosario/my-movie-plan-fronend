@@ -8,6 +8,8 @@ import { LoginComponent } from './component/auth/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './component/admin/admin.component';
 import { ErrorComponent } from './component/error/error.component';
+import { HeaderComponent } from './component/outline/header/header.component';
+import { LogoutComponent } from './component/auth/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { ErrorComponent } from './component/error/error.component';
     LoginComponent,
     AdminComponent,
     ErrorComponent,
+    HeaderComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

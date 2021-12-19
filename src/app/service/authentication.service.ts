@@ -18,9 +18,13 @@ export class AuthenticationService {
 
   }
 
-  isUserLoggedIN(){
-    let user = sessionStorage.getItem("authenticatedUser");
+  isUserLoggedIn(){
+    let user = sessionStorage.getItem("authenticatedUuser");
 
-    return !(user ===  null);
+    return !(user === null);
+  }
+
+  logoff(){
+    sessionStorage.removeItem("authenticatedUuser");
   }
 }
