@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
 import { ImageEntity } from 'src/app/entity/image-entity';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
+
+
 
 
 @Component({
@@ -13,13 +18,16 @@ export class MovieListComponent implements OnInit {
 
   private movies:MovieEntity[] = [];
   private image:[] = [];
+  private imagePath:any;
+  
 
-  constructor(private movieService:MovieService) { }
+  constructor(private movieService:MovieService, private _sanitizer: DomSanitizer, private route:Router) { }
   
 
   ngOnInit(): void {
 
     this.getMoviesfromServer();
+    
     
   }
 
@@ -32,7 +40,6 @@ export class MovieListComponent implements OnInit {
 
   getSuccessfulReponse(response: Array<MovieEntity>){
     console.log(response);
-    console.log("running");
     this.movies = response;
   }
 
@@ -47,23 +54,37 @@ export class MovieListComponent implements OnInit {
   }
 
   successfulImageResponse(response: any){
-    this.image = response;
+
+    return response;
 
   }
   getImage(movie:MovieEntity){
+
+  /*  let imagebaseStr= btoa(movie.images[0].image);
+    this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+                 + imagebaseStr);
+
+    console.log(this.imagePath);
+
+    return this.imagePath;*/
     
     let imageEntity: Array<ImageEntity> = movie.images;
     let blobString = imageEntity[0].image;
 
-    console.log(blobString);
+    //console.log(blobString);
     var enc = new TextEncoder();
     let encodeToUint = enc.encode(blobString);
     let blob = new Blob([new Uint8Array(encodeToUint)], {type: 'image/jpg'});
 
-    let imgHref = URL.createObjectURL(blob);
-    
-    return imgHref;
-    //return URL.createObjectURL(movie.images.);
+    return this._sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+
+  }
+
+  gotoMovie(id:number){
+    console.log("running goto movie");
+    this.route.navigate([
+      `/movies/${id}`
+    ]);
   }
 
 }

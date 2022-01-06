@@ -10,6 +10,7 @@ export class MovieEntity{
      price:number;
      images:Array<ImageEntity> = new Array();
 
+
     constructor(id:number, category:string, movieName:string, duration:number, price:number, images:ImageEntity[]){
         this.id = id;
         this.category = category;
@@ -59,7 +60,7 @@ export class MovieEntity{
         this.price = price;
     }
 
-    getImages():ImageEntity[]{
+    public getImages():ImageEntity[]{
         return this.images;
     }
 

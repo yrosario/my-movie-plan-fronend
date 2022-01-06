@@ -17,7 +17,11 @@ export class MovieService {
    
   }
 
+  getMovie(id:number){
+    return this.httpClient.get<MovieEntity>(`http://localhost:8081/movie/${id}`);
+  }
+
   getImage(id:number){
-    return this.httpClient.get(`http://movie/${id}/img`);
+    return this.httpClient.get(`http://localhost:8081/movie/${id}/img`);
   }
 }

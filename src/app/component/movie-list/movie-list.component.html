@@ -13,9 +13,8 @@
         <div class="col" *ngFor="let movie of getMovies()">
             <div class="card shadow-sm">
                 
-                <img [src]='getImage(movie)' width="300" height="300">
+               <button (click)='gotoMovie(movie.id)'>a</button>
   
-                {{ getImage(movie) }}
                 <div class="card-body">
                   <p class="card-text">{{movie.movieName}}</p>
                   <div class="d-flex justify-content-between align-items-center">

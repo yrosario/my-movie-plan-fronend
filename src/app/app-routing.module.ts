@@ -4,6 +4,7 @@ import { AdminComponent } from './component/admin/admin.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { LogoutComponent } from './component/auth/logout/logout.component';
 import { ErrorComponent } from './component/error/error.component';
+import { MovieDescriptionComponent } from './component/movie-description/movie-description.component';
 import { MovieListComponent } from './component/movie-list/movie-list.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path:'admin', component: AdminComponent},
   { path:'logout', component: LogoutComponent},
   { path: 'movies', component: MovieListComponent},
+  { path: 'movies/:id', component: MovieDescriptionComponent},
  
 ];
 
