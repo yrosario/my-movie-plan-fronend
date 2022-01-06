@@ -10,6 +10,8 @@ import { AdminComponent } from './component/admin/admin.component';
 import { ErrorComponent } from './component/error/error.component';
 import { HeaderComponent } from './component/outline/header/header.component';
 import { LogoutComponent } from './component/auth/logout/logout.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MovieListComponent } from './component/movie-list/movie-list.component'
 
 @NgModule({
   declarations: [
@@ -19,11 +21,13 @@ import { LogoutComponent } from './component/auth/logout/logout.component';
     ErrorComponent,
     HeaderComponent,
     LogoutComponent,
+    MovieListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
