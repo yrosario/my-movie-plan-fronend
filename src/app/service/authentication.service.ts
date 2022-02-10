@@ -1,11 +1,81 @@
+import { API_URL } from '../app.constants';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+export const TOKEN = 'authenticatedUser'
+export const AUTHENTICATED_USER = 'authenticatedUser'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() { }
+  public token: string;
+
+  constructor(private http: HttpClient) { 
+    this.token = null;
+  }
+
+  login(username:string, password:string): Observable<HttpErrorResponse | HttpResponse<any>> {
+    return this.http.post<HttpErrorResponse | HttpResponse<any>>
+      (`${API_URL}/login`, {"username":username, "password":password}, {observe: 'response'});
+
+  }
+
+
+  isUserLoggedIn(){
+    let user = sessionStorage.getItem(AUTHENTICATED_USER);
+
+    return !(user === null);
+  }
+
+  logoff(){
+    this.token = null;
+    sessionStorage.removeItem(AUTHENTICATED_USER);
+  }
+
+  saveToken(token: string): void{
+    this.token = token;
+    localStorage.setItem(AUTHENTICATED_USER, token);
+  }
+
+  loadToken(): void{
+    this.token = localStorage.getItem('token');
+  }
+
+  getToken(): string {
+    return this.token;
+  }
+
+  executeJWTAuthenticationService(username: string, password: string){
+    
+    console.log("ExecuteJWTAuthentication is running");
+    console.log("url " + `${API_URL}/login`);
+
+    let body = new URLSearchParams();
+    body.set('username', username);
+    body.set('password', password);
+
+    console.log("body " + body);
+    return this.http.post<any>(
+      `${API_URL}/login`,body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }).pipe(
+        map(
+          data => {
+            console.log("datat "+ data);
+            sessionStorage.setItem(AUTHENTICATED_USER, username);
+            sessionStorage.setItem(TOKEN, `Bearer ${data.access_token}` );
+            console.log("access token" + `Bearer ${data.access_token}` );
+            return data;
+          }
+        )
+      );
+  }
 
   authenticate(username: string, password: string):boolean {
     if (username === "test" && password == "test") {
@@ -16,15 +86,5 @@ export class AuthenticationService {
     }
 
 
-  }
-
-  isUserLoggedIn(){
-    let user = sessionStorage.getItem("authenticatedUuser");
-
-    return !(user === null);
-  }
-
-  logoff(){
-    sessionStorage.removeItem("authenticatedUuser");
   }
 }
