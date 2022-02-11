@@ -11,7 +11,9 @@ import { ErrorComponent } from './component/error/error.component';
 import { HeaderComponent } from './component/outline/header/header.component';
 import { LogoutComponent } from './component/auth/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MovieListComponent } from './component/movie-list/movie-list.component'
+import { MovieListComponent } from './component/movie-list/movie-list.component';
+import { RegistrationFormComponent } from './component/auth/login/registration-form/registration-form.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { MovieListComponent } from './component/movie-list/movie-list.component'
     HeaderComponent,
     LogoutComponent,
     MovieListComponent,
+    RegistrationFormComponent,
   ],
   imports: [
     BrowserModule,

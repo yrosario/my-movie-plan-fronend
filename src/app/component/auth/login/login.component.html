@@ -12,7 +12,8 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" [(ngModel)]="password" required>
           
-      <button type="button" (click)=handleJWTLogin()>Login</button>
+      <button type="button" class="btn btn-success" (click)=handleJWTLogin()>Login</button>
+      <button type="button"class="btn btn-danger" routerLink="/register">Register</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
