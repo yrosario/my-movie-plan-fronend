@@ -69,8 +69,16 @@ export class MovieListComponent implements OnInit {
     //return URL.createObjectURL(movie.images.);
   }
 
-  //Check if the user has logged in
-  isUserLoggedIn(){
+  //Add item to cart if user has logged in. Otherwise redirect to login page
+  addToCart(){
+    if(this.authenticationService.isUserLoggedIn()){
+      return;
+    }else{
+      this.redirectToLogin();
+    }
+  }
+
+  butMovie(){
     if(this.authenticationService.isUserLoggedIn()){
       return;
     }else{
