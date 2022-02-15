@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
 import { ImageEntity } from 'src/app/entity/image-entity';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +16,8 @@ export class MovieListComponent implements OnInit {
   private movies:MovieEntity[] = [];
   private image:[] = [];
 
-  constructor(private movieService:MovieService) { }
+  constructor(private movieService:MovieService, private authenticationService:AuthenticationService,
+              private router:Router) { }
   
 
   ngOnInit(): void {
@@ -64,6 +67,20 @@ export class MovieListComponent implements OnInit {
     
     return imgHref;
     //return URL.createObjectURL(movie.images.);
+  }
+
+  //Check if the user has logged in
+  isUserLoggedIn(){
+    if(this.authenticationService.isUserLoggedIn()){
+      return;
+    }else{
+      this.redirectToLogin();
+    }
+  }
+
+  //If the user has not logged in redirect to login page
+  redirectToLogin(): void{
+    this.router.navigate(['login']);
   }
 
 }
