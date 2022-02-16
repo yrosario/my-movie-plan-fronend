@@ -13,6 +13,9 @@ import { LogoutComponent } from './component/auth/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieListComponent } from './component/movie-list/movie-list.component';
 import { RegistrationFormComponent } from './component/auth/login/registration-form/registration-form.component';
+import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
+import { CartItemComponent } from './component/shopping-cart/cart-item/cart-item.component';
+
 
 
 @NgModule({
@@ -25,6 +28,8 @@ import { RegistrationFormComponent } from './component/auth/login/registration-f
     LogoutComponent,
     MovieListComponent,
     RegistrationFormComponent,
+    ShoppingCartComponent,
+    CartItemComponent,
   ],
   imports: [
     BrowserModule,

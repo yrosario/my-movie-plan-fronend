@@ -1,3 +1,4 @@
+import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './component/admin/admin.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path:'logout', component: LogoutComponent},
   { path: 'movies', component: MovieListComponent},
   { path: 'register', component: RegistrationFormComponent},
+  { path: 'cart', component: ShoppingCartComponent}
  
 ];
 

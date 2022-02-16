@@ -78,7 +78,8 @@ export class MovieListComponent implements OnInit {
     }
   }
 
-  butMovie(){
+  //Buy movie, otherwise redirect to login page
+  buyMovie(){
     if(this.authenticationService.isUserLoggedIn()){
       return;
     }else{
