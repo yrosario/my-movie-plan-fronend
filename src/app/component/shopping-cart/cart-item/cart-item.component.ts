@@ -1,5 +1,5 @@
 import { MovieService } from './../../../service/data/movie.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cart-item',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartItemComponent implements OnInit {
 
+  @Input() cartItem: any;
+  
   constructor() { }
 
   ngOnInit(): void {

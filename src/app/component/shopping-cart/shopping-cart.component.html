@@ -1,10 +1,19 @@
 <div class="container">
-    <table class="table table-striped" *ngFor="let i of [1,2,3,4,5]">
+    <div *ngIf="cartItems.length == 0" class="alert alert-info"> Cart is Empty</div>
 
-        <tr>
-            <app-cart-item></app-cart-item>
-        </tr>
-    
-    </table>
+    <div *ngIf="cartItems.length > 0">
+        <table  class="table table-striped" *ngFor="let item of cartItems">
+
+            <tr>
+                <app-cart-item [cartItem]="item"></app-cart-item>
+            </tr>
+        
+        </table>
+
+        
+        <strong>Total: </strong>{{ cartTotal | currency:'USD'}}
+        
+    </div>
+
 </div>
 

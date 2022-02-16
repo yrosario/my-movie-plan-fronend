@@ -20,7 +20,7 @@
                   <p class="card-text">{{movie.movieName}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-primary text-light" (click)="addToCart()">add</button>
+                      <button type="button" class="btn btn-primary text-light" (click)="addToCart(movie)">add</button>
                       <button type="button" class="btn btn-success text-light" (click)="buyMovie()">buy</button>
                     </div>
                     <small class="text-dark">{{movie.price | currency}}</small>
@@ -28,7 +28,14 @@
                 </div>
               </div>
         </div>
-  
+
+      <!--view cart items-->
+      <!--
+      <div>
+        <app-shopping-cart></app-shopping-cart>
+      </div>
+    -->
+    
       </div>
 
 </div>
