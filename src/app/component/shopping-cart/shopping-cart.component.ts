@@ -1,7 +1,10 @@
+import { CartEntity } from './../../entity/cart-entity';
+import { CartService } from './../../service/data/cart.service';
+import { UserService } from './../../service/data/user.service';
 import { MovieService } from './../../service/data/movie.service';
-import { MovieEntity } from 'src/app/entity/movie-entity';
 import { Component, OnInit } from '@angular/core';
 import { MessengerService } from 'src/app/service/shared/messenger.service';
+
 
 
 @Component({
@@ -11,25 +14,53 @@ import { MessengerService } from 'src/app/service/shared/messenger.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  cartItems:Array<MovieEntity>= [
-  ];
+  cartItems:CartEntity[] = [];
 
   cartTotal = 0;
 
-  constructor(private movieService:MovieService, private msgService:MessengerService) { }
+  constructor(private movieService:MovieService, private msgService:MessengerService, 
+              private userService:UserService, private cartService:CartService) { }
 
   
   ngOnInit(): void {
 
-    this.msgService.getMsg().subscribe( movie => {
-      this.cartItems.push(movie as MovieEntity);
+    if(this.cartItems.length == 0)( this.cartTotal = 0);
+    
+    this.msgService.getMsg().subscribe( (movie) => {
+      this.cartItems.push(movie as CartEntity);
+    });
 
-      this.cartItems.forEach((item: { price: number; }) => {
-        this.cartTotal += item.price;  
-      });
-    })
+    this.cartService.retrieveCartFromServer(this.userService.getUser().id)
+      .subscribe(
+        data => {
+          console.log("getting card" +data);
+          this.cartItems = this.cartService.getCard();
+        } 
+      )
 
+      this.cartTotal = 0;
+      
+      for(let item of this.cartItems){
+        this.cartTotal += item.movie.price;
+      }
 
+  }
+
+  removeItem(productId:number){
+    console.log(`remove item clicked #${productId}`);
+      for(let i = 0; i < this.cartItems.length; i++){
+        if(this.cartItems[i].id === productId){
+          console.log(`Within if condition: ${i} and ${productId}`);
+          this.cartTotal -= this.cartItems[i].movie.price;
+          this.cartItems.splice(i,1);
+          break;
+        }
+      }
+    console.log(this.cartItems);
+  }
+
+  getUserCart(){
+    //this.userService.getUser();
   }
 
 }

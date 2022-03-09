@@ -1,10 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { API_URL } from 'src/app/app.constants';
+import { API_URL, AUTHENTICATED_USER } from 'src/app/app.constants';
 import { UserEntity } from 'src/app/entity/user-entity';
 import {map} from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import jwt_decode from "jwt-decode";
+
+
 
 
 @Injectable({
@@ -13,10 +16,27 @@ import { throwError } from 'rxjs';
 export class UserService {
 
   private USERPATH = "user"
+  user:UserEntity = null;
 
   constructor(private http:HttpClient) { }
 
+  retrieveUser(username:string){
+    console.log("retrieve user is executing");
+    return this.http.get(`${API_URL}/${this.USERPATH}/${username}`)
+      .pipe(
+        map(
+          res=>{
+            this.user = res as UserEntity;
+            console.log("Retrieve user " + JSON.stringify(this.user));
+
+            catchError(this.handleError);
+          }
+        )
+      )
+  }
+
   registerUser(user:UserEntity){
+
 
 
     return this.http.post(`${API_URL}/${this.USERPATH}/register`,user, {observe: 'response', responseType: 'text'})
@@ -28,6 +48,34 @@ export class UserService {
 
       );
 
+  }
+
+  setUser(){
+    let decoded = this.getDecodeAccesstoken();
+
+
+    if(decoded.sub){
+      sessionStorage.setItem("username", decoded.sub);
+    }
+  }
+
+  getUser(){
+    return this.user;
+  }
+
+  getDecodeAccesstoken():any{
+    let token:string = sessionStorage.getItem(AUTHENTICATED_USER);
+    if(token === null) return {sub:"error"};
+
+    token = token.substring(7, token.length);
+    console.log("token " + token);
+    try{
+      return jwt_decode(token);
+    }catch(Error){
+      console.log("token returning null");
+      return null;
+    };
+    
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -46,3 +94,5 @@ export class UserService {
 
   
 }
+
+

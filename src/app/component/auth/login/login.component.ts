@@ -1,3 +1,4 @@
+import { UserService } from './../../../service/data/user.service';
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -14,9 +15,10 @@ export class LoginComponent implements OnInit {
   password = "test";
   invalidLogin = false;
 
-  constructor(private router: Router, private authenticationService:AuthenticationService) { }
+  constructor(private router: Router, private authenticationService:AuthenticationService, private userService:UserService) { }
 
   ngOnInit(): void {
+
   }
 
   public handleLogin(){
@@ -31,19 +33,37 @@ export class LoginComponent implements OnInit {
 
 
   public handleJWTLogin(){
+    console.log("handle");
     this.authenticationService.executeJWTAuthenticationService(this.username,this.password)
     .subscribe(
       data => {
         console.log("JWT Login \n" + data);
         this.invalidLogin = false;
-        this.router.navigate(['admin']); 
+        this.getFromServer();
+        //this.router.navigate(['admin']); 
       },
       error => {
         console.log(error);
         this.invalidLogin = true;
       }
     )
+    }
+
+    getFromServer(){
+
+    console.log("test");
+    this.userService.setUser();
+
+    let username = sessionStorage.getItem("username");
+    console.log("running user retrieval " + username);
+    this.userService.retrieveUser(username)
+      .subscribe(
+        data => {
+          console.log("Data " + data );
+        }
+      )
     
   }
+    
 
 }

@@ -2,11 +2,14 @@
     <div *ngIf="cartItems.length == 0" class="alert alert-info"> Cart is Empty</div>
 
     <div *ngIf="cartItems.length > 0">
-        <table  class="table table-striped" *ngFor="let item of cartItems">
+        <table  class="table table-striped" *ngFor="let item of cartItems; let i = index" [attr.data-index]="i">
 
             <tr>
-                <app-cart-item [cartItem]="item"></app-cart-item>
+                <app-cart-item [cartItem]="item" [index]="i+1"></app-cart-item>
+                <td><button type="button" class="btn btn-primary">Buy</button></td>
+                <td><button type="button" class="btn btn-secondary" (click) = "removeItem(item.id)">Remove</button></td>
             </tr>
+            
         
         </table>
 

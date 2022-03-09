@@ -1,11 +1,10 @@
-import { API_URL } from '../app.constants';
+import { API_URL, AUTHENTICATED_USER } from '../app.constants';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-export const TOKEN = 'authenticatedUser'
-export const AUTHENTICATED_USER = 'authenticatedUser'
+export const USERNAME = 'username'
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +33,7 @@ export class AuthenticationService {
   logoff(){
     this.token = null;
     sessionStorage.removeItem(AUTHENTICATED_USER);
+    sessionStorage.removeItem("username");
   }
 
   saveToken(token: string): void{
@@ -51,14 +51,14 @@ export class AuthenticationService {
 
   executeJWTAuthenticationService(username: string, password: string){
     
-    console.log("ExecuteJWTAuthentication is running");
-    console.log("url " + `${API_URL}/login`);
+    //console.log("ExecuteJWTAuthentication is running");
+    //console.log("url " + `${API_URL}/login`);
 
     let body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
 
-    console.log("body " + body);
+    //console.log("body " + body);
     return this.http.post<any>(
       `${API_URL}/login`,body.toString(),
       {
@@ -67,10 +67,11 @@ export class AuthenticationService {
       }).pipe(
         map(
           data => {
-            console.log("datat "+ data);
-            sessionStorage.setItem(AUTHENTICATED_USER, username);
-            sessionStorage.setItem(TOKEN, `Bearer ${data.access_token}` );
-            console.log("access token" + `Bearer ${data.access_token}` );
+            for(const key in data){
+              console.log("key " + data[key] + " ");
+            }
+            sessionStorage.setItem(USERNAME, username);
+            sessionStorage.setItem(AUTHENTICATED_USER , `Bearer ${data.access_token}` );
             return data;
           }
         )
