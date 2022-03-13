@@ -1,3 +1,4 @@
+import { MovieEntity } from './../../../entity/movie-entity';
 import { MovieService } from './../../../service/data/movie.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CartItemComponent implements OnInit {
 
-  @Input() cartItem: any;
+  @Input() cartItem: MovieEntity;
   @Input() index:any;
   
   constructor() { }

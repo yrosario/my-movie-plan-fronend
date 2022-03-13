@@ -30,20 +30,40 @@ export class ShoppingCartComponent implements OnInit {
       this.cartItems.push(movie as CartEntity);
     });
 
-    this.cartService.retrieveCartFromServer(this.userService.getUser().id)
+    //
+    console.log("user id + " + this.userService.getUser());
+    let userId:number = +sessionStorage.getItem("user");
+    this.cartService.retrieveCartFromServer(userId)
       .subscribe(
         data => {
           console.log("getting card" +data);
-          this.cartItems = this.cartService.getCard();
+          this.cartItems = data;
+          //this.cartService.getCard().forEach(item=>{this.cartItems.push(item);});
+          this.calculateSum();
         } 
       )
 
       this.cartTotal = 0;
       
-      for(let item of this.cartItems){
-        this.cartTotal += item.movie.price;
-      }
 
+  }
+
+  calculateSum(){
+    for(let item of this.cartItems){
+      this.cartTotal += item.movie.price;
+    }
+  }
+
+  removeItemFromCart(productId:number){
+    let userId:number = +sessionStorage.getItem("user");
+    this.cartService.deleteFromCartOnServer(userId, productId)
+      .subscribe(
+        data=>{
+          this.removeItemFromCart(userId);
+        }
+      )
+    
+      this.removeItem(productId);
   }
 
   removeItem(productId:number){

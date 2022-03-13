@@ -1,7 +1,7 @@
-import { CART, USER } from './../../app.constants';
+import { CART, USER, CART_ITEM } from './../../app.constants';
 import { API_URL } from 'src/app/app.constants';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
 import { CartEntity } from 'src/app/entity/cart-entity';
 import { Observable } from 'rxjs';
@@ -17,6 +17,7 @@ export class CartService {
   constructor(private http:HttpClient) { }
 
   private cartUrl = API_URL + "/" + CART + "/" + USER;
+  
 
   retrieveCartFromServer(id:number):Observable<CartEntity[]>{
 
@@ -47,7 +48,22 @@ export class CartService {
       )
   }
 
+  deleteFromCartOnServer(userId:number, itemId:number){
+
+    const headerDict = {
+      'Accept': 'text/html',
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict), 
+    };
+    return this.http
+      .delete<string>(this.cartUrl+"/"+userId+"/" + CART_ITEM+"/"+itemId);
+  }
+
   getCard(){
     return this.cart;
   }
+
+
 }

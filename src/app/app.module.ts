@@ -15,6 +15,7 @@ import { MovieListComponent } from './component/movie-list/movie-list.component'
 import { RegistrationFormComponent } from './component/auth/login/registration-form/registration-form.component';
 import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
 import { CartItemComponent } from './component/shopping-cart/cart-item/cart-item.component';
+import {MatIconModule} from '@angular/material/icon'
 
 
 
@@ -35,7 +36,8 @@ import { CartItemComponent } from './component/shopping-cart/cart-item/cart-item
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

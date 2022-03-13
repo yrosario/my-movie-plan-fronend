@@ -27,6 +27,7 @@ export class UserService {
         map(
           res=>{
             this.user = res as UserEntity;
+            sessionStorage.setItem("user", this.user.id.toString());
             console.log("Retrieve user " + JSON.stringify(this.user));
 
             catchError(this.handleError);

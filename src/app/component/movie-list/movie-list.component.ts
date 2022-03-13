@@ -76,7 +76,8 @@ export class MovieListComponent implements OnInit {
   //Add item to cart if user has logged in. Otherwise redirect to login page
   addToCart(movie:MovieEntity){
 
-    this.cartService.postToCartOnServer(this.userService.getUser().id,movie.id).subscribe(
+    let userId:number = +sessionStorage.getItem("user");
+    this.cartService.postToCartOnServer(userId,movie.id).subscribe(
       ()=>{
         if(this.authenticationService.isUserLoggedIn()){
           this.msgService.sendMsg(movie);

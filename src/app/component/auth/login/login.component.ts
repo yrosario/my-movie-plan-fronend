@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         console.log("JWT Login \n" + data);
         this.invalidLogin = false;
         this.getFromServer();
-        //this.router.navigate(['admin']); 
+        this.router.navigate(['movies']); 
       },
       error => {
         console.log(error);
