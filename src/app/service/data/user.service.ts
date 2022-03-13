@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { API_URL, AUTHENTICATED_USER } from 'src/app/app.constants';
 import { UserEntity } from 'src/app/entity/user-entity';
 import {map} from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
 
 
@@ -51,6 +51,7 @@ export class UserService {
 
   }
 
+  //Stored user in local session storage
   setUser(){
     let decoded = this.getDecodeAccesstoken();
 
@@ -60,6 +61,7 @@ export class UserService {
     }
   }
 
+  //get user from local session storage
   getUser(){
     return this.user;
   }
