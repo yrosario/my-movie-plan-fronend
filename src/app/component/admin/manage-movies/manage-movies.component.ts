@@ -27,7 +27,7 @@ export class ManageMoviesComponent implements OnInit {
       );
   }
 
-  editMovie(userId:number){
+  editMovie(userId?:number){
 
     
     this.router.navigate(["/manage-movies/edit"],{queryParams:{id:userId}});
@@ -39,6 +39,17 @@ export class ManageMoviesComponent implements OnInit {
         console.log("Object deleted");
       }
     )
+
+    this.removeMovieFromList(id);
   }
+
+  removeMovieFromList(id:number){
+    for(let i = 0; i < this.movies.length; i++){
+      if(this.movies[i].id == id){
+        this.movies.splice(i,i);
+      }
+    }
+  }
+
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
@@ -38,5 +38,13 @@ export class MovieService {
   deleteMovie(id:number){
 
     return this.httpClient.delete(`http://localhost:8081/movie/${id}`);
+  }
+
+  addMovie(movie:MovieEntity){
+
+    let headers_object = new HttpHeaders().set("Authorization", sessionStorage.getItem("authenticatedUser"));
+    headers_object.set('Content-Type', 'application/x-www-form-urlencoded');
+    
+    return this.httpClient.post("http://localhost:8081/movie/add", movie, {headers:headers_object});
   }
 }

@@ -4,6 +4,7 @@ import { MovieService } from 'src/app/service/data/movie.service';
 import { Component, OnInit, ɵɵNgOnChangesFeature } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {NgForm} from '@angular/forms';
+import { JsonpClientBackend } from '@angular/common/http';
 
 
 @Component({
@@ -17,30 +18,42 @@ export class EditMovieComponent implements OnInit {
   movie:MovieEntity;
 
   constructor(private movieService:MovieService, private route:ActivatedRoute) {
-    this.movie = new MovieEntity(0,"","",0,0,[]);
+    this.movie = new MovieEntity(0,null,"",0,0,null);
    }
 
   ngOnInit(): void {
     this.getQueryParam();
-    this.getUser();
+    this.getMovie();
     console.log(`id number ${this.id}`);
   }
 
 
   getQueryParam(){
 
-    this.route.queryParams.subscribe(
-      (param:any) =>{
-        this.id = param.id;
-      })
+    if(this.id !== null){
+        this.route.queryParams.subscribe(
+          (param:any) =>{
+            this.id = param.id;
+          })
+    }
   }
 
-  getUser(){
-    this.movieService.getMovie(this.id).subscribe(
-      res => {
-        console.log(res);
-        this.movie = res as MovieEntity;
-      }
-    )
+  getMovie(){
+
+    if(this.id != null){
+        this.movieService.getMovie(this.id).subscribe(
+          res => {
+            console.log(res);
+            this.movie = res as MovieEntity;
+          }
+        )
+    }
   }
+
+  addMovie(){
+
+    console.log("Movie " + JSON.stringify(this.movie));
+    this.movieService.addMovie(this.movie).subscribe();
+  }
+
 }
