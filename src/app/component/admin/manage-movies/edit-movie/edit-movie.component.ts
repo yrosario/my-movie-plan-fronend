@@ -30,6 +30,7 @@ export class EditMovieComponent implements OnInit {
 
   getQueryParam(){
 
+    this.movie.images = null;
     if(this.id !== null){
         this.route.queryParams.subscribe(
           (param:any) =>{
@@ -54,6 +55,11 @@ export class EditMovieComponent implements OnInit {
 
     console.log("Movie " + JSON.stringify(this.movie));
     this.movieService.addMovie(this.movie).subscribe();
+  }
+
+  updateMovie(){
+
+    this.movieService.updateMovie(this.movie).subscribe();
   }
 
 }

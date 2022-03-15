@@ -47,4 +47,9 @@ export class MovieService {
     
     return this.httpClient.post("http://localhost:8081/movie/add", movie, {headers:headers_object});
   }
+
+  updateMovie(movie:MovieEntity){
+    let headers_object = new HttpHeaders().set("Authorization", sessionStorage.getItem("authenticatedUser"));
+    return this.httpClient.put("http://localhost:8081/movie/update", movie, {headers:headers_object});
+  }
 }
