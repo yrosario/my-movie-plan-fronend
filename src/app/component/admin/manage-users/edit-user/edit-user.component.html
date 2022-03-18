@@ -1,0 +1,61 @@
+
+<div class="container">
+    <form>
+        
+        
+           
+           <div class="form-group row">
+             <label for="inputMovieName" class="col-sm-2 col-form-label">User id#</label>
+             <div class="col-sm-10">
+               <input type="text" class="form-control" id="inputMovieName" placeholder="Email" name="inputMovieName" [(ngModel)] ="user.id">
+             </div>
+           </div>
+           <div class="form-group row">
+             <label for="inputUSername" class="col-sm-2 col-form-label">username</label>
+             <div class="col-sm-10">
+               <input type="number" class="form-control" id="inputUusername" placeholder="0" name="inputUsername" [(ngModel)]="user.username">
+             </div>
+           </div>
+           <div class="form-group row">
+               <label for="inputLastName" class="col-sm-2 col-form-label" >Last Name</label>
+               <div class="col-sm-10">
+                 <input type="number" class="form-control" id="inputLength" placeholder="0" name="inputLength" [(ngModel)]="user.lName">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+               <div class="col-sm-10">
+                 <input type="text" class="form-control" id="inputCategory" placeholder="Action" [(ngModel)]="user.email">
+               </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputbirthday" class="col-sm-2 col-form-label">Birthday</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" id="inputCategory" placeholder="Action" [(ngModel)]="user.birthday">
+                </div>
+             </div>
+
+             <div class="form-group row">
+                <label for="inputActive" class="col-sm-2 col-form-label">Active</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" id="inputCategory" placeholder="Action" [(ngModel)]="user.active">
+                </div>
+             </div>
+
+             <div class="form-group row">
+                <label for="inputRoles" class="col-sm-2 col-form-label">Roles</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" id="inputRoles" placeholder="Action" [(ngModel)]="user.roles">
+                </div>
+             </div>
+   
+           <div class="form-group row">
+             <div class="col-sm-10">
+               <button  *ngIf="user == null" type="button" class="btn btn-primary" (click)="addUser()">Add</button>
+               <button  *ngIf="user != null" type="button" class="btn btn-primary" (click)="updateUser()">Update</button>
+             </div>
+           </div>
+     
+      </form>
+    
+</div>   

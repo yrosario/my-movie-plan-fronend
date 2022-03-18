@@ -36,10 +36,15 @@ export class UserService {
       )
   }
 
+  
+  retrieveUserById(id:number){
+    return this.http.get<UserEntity>(`${API_URL}/${this.USERPATH}/${id}`);
+  }
+
+
+
+
   registerUser(user:UserEntity){
-
-
-
     return this.http.post(`${API_URL}/${this.USERPATH}/register`,user, {observe: 'response', responseType: 'text'})
       .pipe(
         map(
@@ -50,6 +55,11 @@ export class UserService {
       );
 
   }
+
+retrieveUsers(){
+
+  return this.http.get<UserEntity[]>(`${API_URL}/user/list`);
+}
 
   //Stored user in local session storage
   setUser(){

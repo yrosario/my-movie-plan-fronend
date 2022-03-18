@@ -18,6 +18,8 @@ import { CartItemComponent } from './component/shopping-cart/cart-item/cart-item
 import {MatIconModule} from '@angular/material/icon';
 import { ManageMoviesComponent } from './component/admin/manage-movies/manage-movies.component';
 import { EditMovieComponent } from './component/admin/manage-movies/edit-movie/edit-movie.component';
+import { ManageUsersComponent } from './component/admin/manage-users/manage-users.component';
+import { EditUserComponent } from './component/admin/manage-users/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { EditMovieComponent } from './component/admin/manage-movies/edit-movie/e
     CartItemComponent,
     ManageMoviesComponent,
     EditMovieComponent,
+    ManageUsersComponent,
+    EditUserComponent,
 
   ],
   imports: [

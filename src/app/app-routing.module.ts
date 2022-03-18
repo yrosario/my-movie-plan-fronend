@@ -9,6 +9,8 @@ import { LogoutComponent } from './component/auth/logout/logout.component';
 import { ErrorComponent } from './component/error/error.component';
 import { MovieListComponent } from './component/movie-list/movie-list.component';
 import { EditMovieComponent } from './component/admin/manage-movies/edit-movie/edit-movie.component';
+import { ManageUsersComponent } from './component/admin/manage-users/manage-users.component';
+import { EditUserComponent } from './component/admin/manage-users/edit-user/edit-user.component';
 
 const routes: Routes = [
   { path:'', component: LoginComponent},
@@ -19,7 +21,11 @@ const routes: Routes = [
   { path: 'register', component: RegistrationFormComponent},
   { path: 'cart', component: ShoppingCartComponent},
   { path: 'manage-movies', component: ManageMoviesComponent},
-  { path: 'manage-movies/edit', component: EditMovieComponent}
+  { path: 'manage-movies/edit', component: EditMovieComponent},
+  { path: 'manage-users', component: ManageUsersComponent},
+  { path: 'manage-user/edit-user', component: EditUserComponent}
+
+  
  
 ];
 
