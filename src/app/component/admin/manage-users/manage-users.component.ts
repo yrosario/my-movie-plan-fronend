@@ -33,6 +33,27 @@ export class ManageUsersComponent implements OnInit {
        this.router.navigate(["/manage-user/edit-user"],{queryParams:{id:userId}});
   }
 
+  deleteUser(userId:number){
+
+    this.userService.deletUser(userId).subscribe(
+      res => {
+        console.log("deleted user");
+        
+      }
+    )
+
+    this.removeUserFromList(userId);
+  }
+
+  removeUserFromList(userId:number){
+
+    for(let i = 0; i < this.users.length; i++){
+      if(this.users[i].id == userId){
+        this.users.splice(i,i);
+      }
+    }
+  }
+
 
 
 

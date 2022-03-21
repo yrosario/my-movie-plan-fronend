@@ -1,8 +1,8 @@
+import { UserEntity } from './../../entity/user-entity';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { API_URL, AUTHENTICATED_USER } from 'src/app/app.constants';
-import { UserEntity } from 'src/app/entity/user-entity';
 import {map} from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
@@ -22,7 +22,7 @@ export class UserService {
 
   retrieveUser(username:string){
     console.log("retrieve user is executing");
-    return this.http.get(`${API_URL}/${this.USERPATH}/${username}`)
+    return this.http.get(`${API_URL}/${this.USERPATH}/us/${username}`)
       .pipe(
         map(
           res=>{
@@ -41,6 +41,10 @@ export class UserService {
     return this.http.get<UserEntity>(`${API_URL}/${this.USERPATH}/${id}`);
   }
 
+  updateUser(user:UserEntity){
+    return this.http.put(`${API_URL}/${this.USERPATH}/update`, user);
+  }
+
 
 
 
@@ -55,6 +59,11 @@ export class UserService {
       );
 
   }
+
+deletUser(id:number){
+
+  return this.http.delete(`${API_URL}/${this.USERPATH}/${id}`);
+}
 
 retrieveUsers(){
 

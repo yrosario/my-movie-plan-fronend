@@ -12,7 +12,7 @@
                <th>birthday</th>
                <th>active</th>
                <th>roles</th>
-               <th><button type="button" class="btn btn-success">Add</button></th>
+               <th><button type="button" class="btn btn-success" (click)="editUser()">Add</button></th>
    
            </tr>
         </thead>
@@ -28,9 +28,9 @@
                  <td>{{user.city}}</td>
                  <td>{{user.birthday}}</td>
                  <td>{{user.active}}</td>
-                 <td>{{user.roles}}</td>
+                 <td>{{user.roles | json}}</td>
                  <td><button type="button"  (click)="editUser(user.id)" class="btn btn-info">edit</button></td>
-                 <td><button type="button"  class="btn btn-danger">delete</button></td>
+                 <td><button type="button"  (click)="deleteUser(user.id)" class="btn btn-danger">delete</button></td>
      
              </tr>
         </tbody>

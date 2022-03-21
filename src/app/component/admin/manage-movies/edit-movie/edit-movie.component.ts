@@ -1,10 +1,8 @@
-import { UserEntity } from 'src/app/entity/user-entity';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
-import { Component, OnInit, ɵɵNgOnChangesFeature } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {NgForm} from '@angular/forms';
-import { JsonpClientBackend } from '@angular/common/http';
+
 
 
 @Component({

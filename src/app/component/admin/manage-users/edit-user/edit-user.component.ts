@@ -1,6 +1,6 @@
+import { UserEntity } from './../../../../entity/user-entity';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserEntity } from 'src/app/entity/user-entity';
 import { UserService } from 'src/app/service/data/user.service';
 
 @Component({
@@ -10,24 +10,36 @@ import { UserService } from 'src/app/service/data/user.service';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor(private userService:UserService, private router:ActivatedRoute) { }
-
   id:number;
   user:UserEntity;
 
+  constructor(private userService:UserService, private router:ActivatedRoute) {
+    this.user = new UserEntity("","","","","","","","");
+   }
+
+
+
   ngOnInit(): void {
     this.getQueryParam();
-    this.getUser();
+    
 
     console.log("Display id " + this. id);
   }
 
   addUser(){
-    console.log(this.user);
+    this.userService.registerUser(this.user).subscribe(
+      res => {
+        console.log("add new user " + JSON.stringify(res));
+      }
+    );
   }
 
   updateUser(){
-    console.log(this.user);
+    this.userService.updateUser(this.user).subscribe(
+       res => {
+          console.log("Update user service " + JSON.stringify(res)); 
+       }
+    )
   }
 
   getQueryParam(){
@@ -36,6 +48,7 @@ export class EditUserComponent implements OnInit {
         this.router.queryParams.subscribe(
           (param:any) =>{
             this.id = param.id;
+            this.getUser();
           })
     }
   }
@@ -45,7 +58,7 @@ export class EditUserComponent implements OnInit {
       this.userService.retrieveUserById(this.id).subscribe(
         res => {
           this.user = res; 
-          console.log(this.user);
+          console.log("user info" + this.user);
         }
       )
     }
