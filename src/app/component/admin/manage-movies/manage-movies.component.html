@@ -1,0 +1,31 @@
+<div class="container">
+    <table class="table">
+        <thead>
+           <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Category</th>
+               <th>Price</th>
+               <th>length</th>
+               <th>edit</th>
+               <th>Delete</th>
+               <th><button type="button" (click)="editMovie()" class="btn btn-success">Add</button></th>
+   
+           </tr>
+        </thead>
+
+        <tbody>
+             <tr *ngFor="let movie of movies">
+                 <td>{{movie.id}}</td>
+                 <td>{{movie.movieName}}</td>
+                 <td>{{movie.category}}</td>
+                 <td>{{movie.price}}</td>
+                 <td>{{movie.duration}}</td>
+                 <td><button type="button" (click)="editMovie(movie.id)" class="btn btn-info">edit</button></td>
+                 <td><button type="button" (click)="deleteMovie(movie.id)" class="btn btn-danger">delete</button></td>
+     
+             </tr>
+        </tbody>
+
+    </table>
+</div>

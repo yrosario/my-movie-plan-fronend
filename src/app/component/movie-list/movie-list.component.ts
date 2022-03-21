@@ -1,7 +1,12 @@
+import { UserService } from './../../service/data/user.service';
+import { CartService } from './../../service/data/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
 import { ImageEntity } from 'src/app/entity/image-entity';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { Router } from '@angular/router';
+import { MessengerService } from 'src/app/service/shared/messenger.service';
 
 
 @Component({
@@ -14,7 +19,9 @@ export class MovieListComponent implements OnInit {
   private movies:MovieEntity[] = [];
   private image:[] = [];
 
-  constructor(private movieService:MovieService) { }
+  constructor(private movieService:MovieService, private authenticationService:AuthenticationService,
+              private router:Router, private msgService:MessengerService,
+              private cartService:CartService, private userService:UserService) { }
   
 
   ngOnInit(): void {
@@ -65,5 +72,36 @@ export class MovieListComponent implements OnInit {
     return imgHref;
     //return URL.createObjectURL(movie.images.);
   }
+
+  //Add item to cart if user has logged in. Otherwise redirect to login page
+  addToCart(movie:MovieEntity){
+
+    let userId:number = +sessionStorage.getItem("user");
+    this.cartService.postToCartOnServer(userId,movie.id).subscribe(
+      ()=>{
+        if(this.authenticationService.isUserLoggedIn()){
+          this.msgService.sendMsg(movie);
+        }else{
+          this.redirectToLogin();
+        }
+      }
+    )
+
+  }
+
+  //Buy movie, otherwise redirect to login page
+  buyMovie(){
+    if(this.authenticationService.isUserLoggedIn()){
+      return;
+    }else{
+      this.redirectToLogin();
+    }
+  }
+
+  //If the user has not logged in redirect to login page
+  redirectToLogin(): void{
+    this.router.navigate(['login']);
+  }
+
 
 }
