@@ -1,7 +1,9 @@
 import { UserEntity } from './../../../../entity/user-entity';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/service/data/user.service';
+import { RoleEnty } from 'src/app/entity/role-entity';
+import { RoleService } from 'src/app/service/data/role.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,8 +14,10 @@ export class EditUserComponent implements OnInit {
 
   id:number;
   user:UserEntity;
+  roles:Array<RoleEnty> = new Array();
+  selectOptions:number;
 
-  constructor(private userService:UserService, private router:ActivatedRoute) {
+  constructor(private userService:UserService, private roleService:RoleService, private router:ActivatedRoute) {
     this.user = new UserEntity("","","","","","","","");
    }
 
@@ -21,10 +25,12 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQueryParam();
+    this.getRoles();
     
 
     console.log("Display id " + this. id);
   }
+
 
   addUser(){
     this.userService.registerUser(this.user).subscribe(
@@ -35,6 +41,8 @@ export class EditUserComponent implements OnInit {
   }
 
   updateUser(){
+    console.log(" select options " + JSON.stringify(this.selectOptions));
+    this.user.roles.push(new RoleEnty(this.selectOptions));
     this.userService.updateUser(this.user).subscribe(
        res => {
           console.log("Update user service " + JSON.stringify(res)); 
@@ -62,6 +70,19 @@ export class EditUserComponent implements OnInit {
         }
       )
     }
+  }
+
+  getRoles(){
+      this.roleService.getRoles().subscribe(
+        res => {
+          console.log("Roles " + JSON.stringify(res));
+          this.roles = res;
+        }
+      )
+  }
+
+  setRole(role:RoleEnty){
+    this.user.roles.push(role);
   }
 
 }

@@ -2,6 +2,7 @@ import { UserEntity } from './../../../../entity/user-entity';
 import { UserService } from './../../../../service/data/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoleEnty } from 'src/app/entity/role-entity';
 
 
 @Component({
@@ -21,6 +22,12 @@ export class RegistrationFormComponent implements OnInit {
 
   registerUser()
   {
+    console.log(JSON.stringify(this.user));
+    
+    this.user.roles = new Array();
+    this.user.roles.push(new RoleEnty(2, "ROLE_USER"));
+
+    console.log(JSON.stringify(this.user));
     this.userSerive.registerUser(this.user).subscribe(
       data =>
       {
