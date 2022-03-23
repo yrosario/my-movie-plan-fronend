@@ -56,9 +56,9 @@
                 <label for="inputRoles" class="col-sm-2 col-form-label">Roles</label>
                 <div class="col-sm-10">
 
-                  <select  name="inputRoles" >
+                  <select  name="inputRoles" [(ngModel)]="selectOptions">
                     
-                    <option id="" *ngFor="let role of roles" [value]="role.name">
+                    <option id="" *ngFor="let role of roles" [value]="role.id" >
                         {{role.name}}
                     </option>
                     
