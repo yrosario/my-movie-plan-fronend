@@ -56,25 +56,12 @@
                 <label for="inputRoles" class="col-sm-2 col-form-label">Roles</label>
                 <div class="col-sm-10">
 
-                  <select  *ngIf="id != null" name="inputRoles" id="">
-                    <option>
-                      <div *ngFor="let role of user.roles">
+                  <select  name="inputRoles" >
+                    
+                    <option id="" *ngFor="let role of roles" [value]="role.name">
                         {{role.name}}
-                      </div>
-                      </option>
-
-                      <option value="ROLE_USER">
-                        ROLE_USER
-                      </option>
-                  </select>
-
-                  <select  *ngIf="id == null" name="inputRoles" id="">
-                    <option value="ROLE_USER">
-                      ROLE_USER
                     </option>
-                    <option value="ROLE_ADMIN">
-                      ROLE_ADMIN
-                    </option>
+                    
                   </select>
                 
                 </div>

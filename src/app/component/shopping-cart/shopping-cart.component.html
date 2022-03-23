@@ -21,7 +21,7 @@
                     <td><strong> {{ item.movie.movieName }} </strong></td>
                     <td><strong>{{ item.movie.duration }}</strong></td>
                     <td><strong> {{ item.movie.price | currency:'USD' }}</strong></td>
-                    <td><button type="button" class="btn btn-secondary" (click) = "removeItemFromCart(item.id)">Remove</button></td>
+                    <td><button type="button" class="btn btn-danger" (click) = "removeItemFromCart(item.id)">Remove</button></td>
                 </tr>
             </tbody>
             

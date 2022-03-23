@@ -25,7 +25,7 @@ export class UserEntity{
         this.birthday = birthday;
         this.password = password;
         this.active = true;
-        this.roles = [{"name":"ROLE_USER"}];
+        this.roles = null;
         
     }
 
@@ -85,12 +85,6 @@ export class UserEntity{
 
     getRoles():Array<RoleEnty>{
         return this.roles;
-    }
-
-    setRole(name:string):void{
-        let role = new RoleEnty();
-        role.name = name;
-        this.roles.push(role);
     }
 
 
