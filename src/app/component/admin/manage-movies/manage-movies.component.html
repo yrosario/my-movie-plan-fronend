@@ -18,7 +18,11 @@
              <tr *ngFor="let movie of movies">
                  <td>{{movie.id}}</td>
                  <td>{{movie.movieName}}</td>
-                 <td>{{movie.category}}</td>
+                 <td >
+                     <p *ngFor="let category of movie.categories">
+                        {{category.categoryName}}
+                     </p>
+                </td>
                  <td>{{movie.price}}</td>
                  <td>{{movie.duration}}</td>
                  <td><button type="button" (click)="editMovie(movie.id)" class="btn btn-info">edit</button></td>
