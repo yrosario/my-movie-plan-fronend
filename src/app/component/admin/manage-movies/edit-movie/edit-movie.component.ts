@@ -2,6 +2,8 @@ import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from 'src/app/service/data/category.service';
+import { CategoryEntity } from 'src/app/entity/category-entity';
 
 
 
@@ -14,14 +16,16 @@ export class EditMovieComponent implements OnInit {
 
   id:number=0;
   movie:MovieEntity;
+  categories:Array<CategoryEntity>;
 
-  constructor(private movieService:MovieService, private route:ActivatedRoute) {
+  constructor(private movieService:MovieService, private categoryService:CategoryService, private route:ActivatedRoute) {
     this.movie = new MovieEntity(0,null,"",0,0,null);
    }
 
   ngOnInit(): void {
     this.getQueryParam();
     this.getMovie();
+    this.getCategories();
     console.log(`id number ${this.id}`);
   }
 
@@ -58,6 +62,15 @@ export class EditMovieComponent implements OnInit {
   updateMovie(){
 
     this.movieService.updateMovie(this.movie).subscribe();
+  }
+
+  getCategories(){
+
+    this.categoryService.getCategories().subscribe(
+      res => {
+        this.categories = res;
+      }
+    )
   }
 
 }

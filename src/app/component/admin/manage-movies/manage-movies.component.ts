@@ -2,6 +2,9 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
+import { CategoryService } from 'src/app/service/data/category.service';
+import { CategoryEntity } from 'src/app/entity/category-entity';
+
 
 @Component({
   selector: 'app-manage-movies',
@@ -10,11 +13,13 @@ import { MovieService } from 'src/app/service/data/movie.service';
 })
 export class ManageMoviesComponent implements OnInit {
   movies:Array<MovieEntity> = [];
+  categories:Array<CategoryEntity> = [];
 
-  constructor(private movieService:MovieService, private router: Router) { }
+  constructor(private movieService:MovieService, private categoryService:CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.getMovies();
+    this.getCategories();
   }
 
   getMovies(){
@@ -51,5 +56,14 @@ export class ManageMoviesComponent implements OnInit {
     }
   }
 
+  getCategories(){
+
+    this.categoryService.getCategories().subscribe(
+      res => {
+        this.categories = res;
+        console.log("Category response " + JSON.stringify(res));
+      }
+      )
+  }
 
 }

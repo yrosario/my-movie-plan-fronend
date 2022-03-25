@@ -1,18 +1,19 @@
+import { CategoryEntity } from "./category-entity";
 import { ImageEntity } from "./image-entity";
 
 
 export class MovieEntity{
      id: number;
 
-     category:string;
+     categories:Array<CategoryEntity>;
      movieName:string;
      duration:number;
      price:number;
      images:Array<ImageEntity> = new Array();
 
-    constructor(id:number, category:string, movieName:string, duration:number, price:number, images:ImageEntity[]){
+    constructor(id:number, category:CategoryEntity, movieName:string, duration:number, price:number, images:ImageEntity[]){
         this.id = id;
-        this.category = category;
+        if(category != null){this.categories.push(category)};
         this.movieName = movieName;
         this.duration = duration;
         this.price = price;
@@ -27,12 +28,12 @@ export class MovieEntity{
         this.id = id;
     }
 
-    getCategory(){
-        return this.category;
+    getCategories(){
+        return this.categories;
     }
 
-    setCategory(category:string){
-        this.category = category;
+    setCategory(category:CategoryEntity){
+        this.categories.push(category);
     }
 
     getMovieName(){
