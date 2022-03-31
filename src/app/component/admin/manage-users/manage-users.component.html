@@ -1,0 +1,43 @@
+<div class="container">
+    <table class="table">
+        <thead>
+           <tr>
+               <th>id</th>
+               <th>username</th>
+               <th>firstname</th>
+               <th>last name</th>
+               <th>email</th>
+               <th>address</th>
+               <th>city</th>
+               <th>birthday</th>
+               <th>active</th>
+               <th>roles</th>
+               <th><button type="button" class="btn btn-success" (click)="editUser()">Add</button></th>
+   
+           </tr>
+        </thead>
+
+        <tbody>
+             <tr *ngFor="let user of users">
+                 <td>{{user.id}}</td>
+                 <td>{{user.username}}</td>
+                 <td>{{user.fName}}</td>
+                 <td>{{user.lName}}</td>
+                 <td>{{user.birthday}}</td>
+                 <td>{{user.address}}</td>
+                 <td>{{user.city}}</td>
+                 <td>{{user.birthday}}</td>
+                 <td>{{user.active}}</td>
+                 <td>
+                     <p *ngFor="let role of  user.roles">
+                         {{role.name}}
+                     </p>
+                </td>
+                 <td><button type="button"  (click)="editUser(user.id)" class="btn btn-info">edit</button></td>
+                 <td><button type="button"  (click)="deleteUser(user.id)" class="btn btn-danger">delete</button></td>
+     
+             </tr>
+        </tbody>
+
+    </table>
+</div>

@@ -1,4 +1,7 @@
+import { RoleEnty } from "./role-entity";
+
 export class UserEntity{
+    id?:number;
     username:string;
     email:string;
     fName:string;
@@ -8,7 +11,7 @@ export class UserEntity{
     birthday:string;
     password:string;
     active:boolean;
-    roles:[{}];
+    roles:Array<RoleEnty>;
     
     constructor(username:string,email:string, fName:string, lName:string, address:string, city:string,
                 birthday:string, password:string)
@@ -22,7 +25,7 @@ export class UserEntity{
         this.birthday = birthday;
         this.password = password;
         this.active = true;
-        this.roles = [{"name":"ROLE_USER"}];
+        this.roles = null;
         
     }
 
@@ -80,12 +83,8 @@ export class UserEntity{
         return this.active;
     }
 
-    getRoles():[{}]{
+    getRoles():Array<RoleEnty>{
         return this.roles;
-    }
-
-    setRole(role:string):void{
-        this.roles.push("name", role);
     }
 
 

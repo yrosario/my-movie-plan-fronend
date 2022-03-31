@@ -1,0 +1,37 @@
+<div class="container">
+    <div *ngIf="cartItems.length == 0" class="alert alert-info"> Cart is Empty</div>
+
+    <div *ngIf="cartItems.length > 0">
+        <table  class="table" >
+
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">name</th>
+                  <th scope="col">Length</th>
+                  <th scope="col">price</th>
+                  <th scope="col">Remove</th>
+                </tr>
+              </thead>
+
+            <tbody *ngFor="let item of cartItems; let i = index" [attr.data-index]="i">
+                <tr>
+                    <!--<app-cart-item [cartItem]="item.movie" [index]="i+1"></app-cart-item>-->
+                    <th scope="row">{{ i+ 1}}</th>
+                    <td><strong> {{ item.movie.movieName }} </strong></td>
+                    <td><strong>{{ item.movie.duration }}</strong></td>
+                    <td><strong> {{ item.movie.price | currency:'USD' }}</strong></td>
+                    <td><button type="button" class="btn btn-danger" (click) = "removeItemFromCart(item.id)">Remove</button></td>
+                </tr>
+            </tbody>
+            
+        
+        </table>
+
+        
+        <strong>Total: </strong>{{ cartTotal | currency:'USD'}}
+        
+    </div>
+
+</div>
+

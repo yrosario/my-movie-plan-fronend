@@ -13,6 +13,13 @@ import { LogoutComponent } from './component/auth/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieListComponent } from './component/movie-list/movie-list.component';
 import { RegistrationFormComponent } from './component/auth/login/registration-form/registration-form.component';
+import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
+import { CartItemComponent } from './component/shopping-cart/cart-item/cart-item.component';
+import {MatIconModule} from '@angular/material/icon';
+import { ManageMoviesComponent } from './component/admin/manage-movies/manage-movies.component';
+import { EditMovieComponent } from './component/admin/manage-movies/edit-movie/edit-movie.component';
+import { ManageUsersComponent } from './component/admin/manage-users/manage-users.component';
+import { EditUserComponent } from './component/admin/manage-users/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -25,12 +32,20 @@ import { RegistrationFormComponent } from './component/auth/login/registration-f
     LogoutComponent,
     MovieListComponent,
     RegistrationFormComponent,
+    ShoppingCartComponent,
+    CartItemComponent,
+    ManageMoviesComponent,
+    EditMovieComponent,
+    ManageUsersComponent,
+    EditUserComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
