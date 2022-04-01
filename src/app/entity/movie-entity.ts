@@ -1,4 +1,5 @@
 import { CategoryEntity } from "./category-entity";
+import { DescriptionEntity } from "./description-entity";
 import { ImageEntity } from "./image-entity";
 
 
@@ -10,6 +11,7 @@ export class MovieEntity{
      duration:number;
      price:number;
      images:Array<ImageEntity> = new Array();
+     description:DescriptionEntity;
 
     constructor(id:number, category:CategoryEntity, movieName:string, duration:number, price:number, images:ImageEntity[]){
         this.id = id;
