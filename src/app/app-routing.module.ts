@@ -1,3 +1,4 @@
+import { MovieDetailComponent } from './component/movie-list/movie-detail/movie-detail.component';
 import { ManageMoviesComponent } from './component/admin/manage-movies/manage-movies.component';
 import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'manage-movies', component: ManageMoviesComponent},
   { path: 'manage-movies/edit', component: EditMovieComponent},
   { path: 'manage-users', component: ManageUsersComponent},
-  { path: 'manage-user/edit-user', component: EditUserComponent}
+  { path: 'manage-user/edit-user', component: EditUserComponent},
+  { path: 'movies/movie-detail/:id', component: MovieDetailComponent}
 
   
  

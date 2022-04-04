@@ -1,0 +1,22 @@
+<div class="container">
+
+    <div class="card" style="width: 60rem;">
+        <h1>{{ movie.movieName }}</h1>
+        <img class="card-img-top" src="https://via.placeholder.com/200x100" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Description</h5>
+          <p class="card-text">{{ movie.description.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Genre: </strong> <span *ngFor="let category of movie.categories">{{category.categoryName}}</span></li>
+          <li class="list-group-item"><strong>Duration: </strong> {{movie.duration}}</li>
+          <li class="list-group-item"><strong>Price: </strong> {{movie.price | currency}} </li>
+        </ul>
+        <div class="card-body">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary text-light" (click)="addToCart()">add</button>
+                <button type="button" class="btn btn-success text-light" (click)="buyMovie()">buy</button>
+              </div>
+        </div>
+      </div>
+</div>

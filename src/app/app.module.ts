@@ -20,6 +20,7 @@ import { ManageMoviesComponent } from './component/admin/manage-movies/manage-mo
 import { EditMovieComponent } from './component/admin/manage-movies/edit-movie/edit-movie.component';
 import { ManageUsersComponent } from './component/admin/manage-users/manage-users.component';
 import { EditUserComponent } from './component/admin/manage-users/edit-user/edit-user.component';
+import { MovieDetailComponent } from './component/movie-list/movie-detail/movie-detail.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { EditUserComponent } from './component/admin/manage-users/edit-user/edit
     EditMovieComponent,
     ManageUsersComponent,
     EditUserComponent,
+    MovieDetailComponent,
 
   ],
   imports: [
