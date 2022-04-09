@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,7 +9,7 @@ export class ImageService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getImage(id:number){
-    return this.httpClient.get(`http://movie/${id}/img`);
+  getImage(id:number): Observable<Blob>{
+    return this.httpClient.get(`http://localhost:8081/movie/${id}/img`, {responseType: 'blob'});
   }
 }

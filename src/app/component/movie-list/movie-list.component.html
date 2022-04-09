@@ -20,7 +20,8 @@
                   <p class="card-text">{{movie.movieName}}</p>
                   
                   <a [routerLink]="['movie-detail', movie.id]">
-                     <img src="https://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
+                     <!-- <img [src]="https://via.placeholder.com/350x150" alt="Avatar" style="width:100%"> -->
+                     <img [src]="findImage(movie.id)" alt="">
                   </a>
 
                   <p class="card-text">{{movie.description | json}}</p>

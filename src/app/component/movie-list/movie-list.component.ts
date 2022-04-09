@@ -1,12 +1,14 @@
+import { ImageService } from './../../service/data/image.service';
 import { UserService } from './../../service/data/user.service';
 import { CartService } from './../../service/data/cart.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
 import { ImageEntity } from 'src/app/entity/image-entity';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { Router } from '@angular/router';
 import { MessengerService } from 'src/app/service/shared/messenger.service';
+import { identifierModuleUrl } from '@angular/compiler';
 
 
 @Component({
@@ -17,11 +19,12 @@ import { MessengerService } from 'src/app/service/shared/messenger.service';
 export class MovieListComponent implements OnInit {
 
   private movies:MovieEntity[] = [];
-  private image:[] = [];
+  images:{id:string, content:any}[] = [];
 
   constructor(private movieService:MovieService, private authenticationService:AuthenticationService,
               private router:Router, private msgService:MessengerService,
-              private cartService:CartService, private userService:UserService) { }
+              private cartService:CartService, private userService:UserService,
+              private imageService:ImageService) { }
   
 
   ngOnInit(): void {
@@ -41,6 +44,7 @@ export class MovieListComponent implements OnInit {
     console.log(response);
     console.log("running");
     this.movies = response;
+    this.loadImages();
   }
 
   getMovies():MovieEntity[]{
@@ -54,7 +58,7 @@ export class MovieListComponent implements OnInit {
   }
 
   successfulImageResponse(response: any){
-    this.image = response;
+    this.images = response;
 
   }
   getImage(movie:MovieEntity){
@@ -102,6 +106,47 @@ export class MovieListComponent implements OnInit {
   redirectToLogin(): void{
     this.router.navigate(['login']);
   }
+
+  createImageFromBlob(image: Blob, id:string) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => { 
+       this.images.push({id:id, content:reader.result});
+    }, false);
+ 
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+ }
+
+ getImageFromService(id:number) {
+  this.imageService.getImage(id).subscribe(data => {
+    this.createImageFromBlob(data,id.toString());
+  }, error => {
+    console.log(error);
+  });
+
+  
+}
+
+findImage(id:any){
+  console.log("id " +  id);
+  for(let image of this.images){
+
+    console.log(Object.keys(image));
+    if(image.id == id){
+      return image.content;
+    }
+  }
+
+  console.log("could not find image");
+  return null;
+}
+
+loadImages(){
+  for(let movie of this.movies){
+    this.getImageFromService(movie.id);
+  }
+}
 
 
 }
