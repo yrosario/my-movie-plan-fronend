@@ -2,7 +2,7 @@
 
     <div class="card" style="width: 60rem;">
         <h1>{{ movie.movieName }}</h1>
-        <img class="card-img-top" src="https://via.placeholder.com/200x100" alt="Card image cap">
+        <img class="card-img-top" [src]="image" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">Description</h5>
           <p class="card-text">{{ movie.description.description }}</p>
