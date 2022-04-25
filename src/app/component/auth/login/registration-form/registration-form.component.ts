@@ -3,6 +3,7 @@ import { UserService } from './../../../../service/data/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoleEnty } from 'src/app/entity/role-entity';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -38,11 +39,10 @@ export class RegistrationFormComponent implements OnInit {
 
   }
 
-  setUser(username:string, email:string, fName:string, lName:string, address:string, city:string,
-    birthday:string, password:string):void{
-
+  setUser(form: NgForm):void{
+      const value = form.value;
       
-      this.user = new UserEntity(username, email, fName, lName, address, city,birthday,password);
+      this.user = new UserEntity(value.username, value.email, value.fName, value.lName, value.address, value.city,value.birthday,value.password);
       console.log(this.user);
       this.registerUser();
     }

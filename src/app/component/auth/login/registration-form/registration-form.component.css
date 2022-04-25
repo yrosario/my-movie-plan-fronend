@@ -1,0 +1,15 @@
+/* .form-control.ng-valid {
+  background-color: green;
+  color:white;
+  font-weight: bold;
+} */
+
+input.ng-invalid.ng-dirty.ng-touched {
+  background-color: pink;
+}
+
+.registration-banner{
+    background-color:#E7F5F2;
+    text-align: center;
+    border-radius: 15px;
+}

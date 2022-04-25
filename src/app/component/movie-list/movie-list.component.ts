@@ -1,14 +1,13 @@
 import { ImageService } from './../../service/data/image.service';
 import { UserService } from './../../service/data/user.service';
 import { CartService } from './../../service/data/cart.service';
-import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MovieEntity } from 'src/app/entity/movie-entity';
 import { MovieService } from 'src/app/service/data/movie.service';
 import { ImageEntity } from 'src/app/entity/image-entity';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { Router } from '@angular/router';
 import { MessengerService } from 'src/app/service/shared/messenger.service';
-import { identifierModuleUrl } from '@angular/compiler';
 
 
 @Component({
